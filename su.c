@@ -283,7 +283,7 @@ static __attribute__ ((noreturn)) void allow(struct su_context *ctx, const char 
 }
 
 /*
- * Lineage-specific behavior
+ * RR-specific behavior
  *
  * we can't simply use the property service, since we aren't launched from init
  * and can't trust the location of the property workspace.
@@ -296,10 +296,10 @@ int access_disabled(const struct su_initiator *from) {
     size_t len;
 
     data = read_file("/system/build.prop");
-    /* only allow su on Lineage 15.1 (or newer) builds */
-    if (!(check_property(data, "ro.lineage.version"))) {
+    /* only allow su on RR builds */
+    if (!(check_property(data, "ro.rr.version"))) {
         free(data);
-        ALOGE("Root access disabled on Non-Lineage builds");
+        ALOGE("Root access disabled on Non-ResurrectionRemix builds");
         return 1;
     }
 
